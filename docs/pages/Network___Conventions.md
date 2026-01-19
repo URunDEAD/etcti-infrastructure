@@ -1,0 +1,50 @@
+# Host naming patterns
+	- **{location}-{type}-{function}-{number}**
+	- ## Location
+		- upt_b226 (UPT, room b226b)
+		- upt_roedu (UPT, roedu )
+		- sptjud_150 (Spitalul Judenetean, room 150)
+		- usr\_{netbird_username\} (User mobile device like a phone, laptop)
+	- ## Type
+	  id:: 696e525a-28ea-4ddf-81ba-b322295e30a6
+		- srv (Physical/virtual server)
+		- k8s (Kubernetes node)
+		- gw (Gateway/router)
+		- If **location** is **usr**:
+			- lap (Laptop)
+			- mob (Mobile phone)
+			- pc (Personal Computer)
+			- oth (other)
+	- ## Function
+		- db (Database)
+		- web (Serving Web)
+		- pve (Proxmox Hypervisor)
+		- ws (Work Station)
+		- If **type** is **k8s** or **pve**
+			- master
+			- worker
+		- If **location** is **usr**:
+			- acs (Access)
+	- ## Number
+		- An number to help differenciate between multiple resources that share the same propreties listed above (HA with more masters for example).
+	- ## Examples
+		- upt_b226a-srv-web-1 - UPT B226, Server, Web, #1
+		- upt_b226a-srv-ws-1 - UPT B226, Server, Work Station, #1
+		- upt_b126-srv-db-1 - UPT B126, Server, Database, #1
+		- upt_b226b-k8s-master-1 - UPT B226, K8s, Master node, #1
+		- lon-srv-app-2 - London, Server, Application, #2
+		- usr_paul_schuldesz-mobile-acs-1
+- # Group naming patterns
+	- ## Peer Groups
+		- Examples:
+			- nyc-servers - All NYC servers
+			- lax-servers - All LAX servers
+			- k8s-cluster - All K8s nodes regardless of location
+			- web-team - Web team user devices
+			- db-admins - Database admin devices
+			- all-servers - All servers across locations
+	- ## Team Groups
+		- team-{team_name}
+		- Examples
+			- team-datalab
+			- team-artificial_vision

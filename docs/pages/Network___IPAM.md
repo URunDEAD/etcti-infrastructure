@@ -1,0 +1,7 @@
+- Netbird
+	- [Netbird Dashboard](https://netbird.urundead.win/)
+- Public
+	- 193.226.10.59 -> upt_roedu-srv-pve-1
+- Private
+	- 10.0.0.0/30  -> upt_roedu-srv-pve-1
+	- 10.0.1.0/24  -> upt_roedu-srv-pve-1
