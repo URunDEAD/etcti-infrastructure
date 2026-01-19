@@ -29,6 +29,7 @@ If **location** is **usr**:
 - db (Database)
 - web (Serving Web)
 - pve (Proxmox Hypervisor)
+- ws (Work Station)
 
 If **type** is **k8s** or **pve**
 - master
@@ -42,6 +43,7 @@ An number to help differenciate between multiple resources that share the same p
 
 #### Examples:
 - upt_b226a-srv-web-1 - UPT B226, Server, Web, #1
+- upt_b226a-srv-ws-1 - UPT B226, Server, Work Station, #1
 - upt_b126-srv-db-1 - UPT B126, Server, Database, #1
 - upt_b226b-k8s-master-1 - UPT B226, K8s, Master node, #1
 - lon-srv-app-2 - London, Server, Application, #2
