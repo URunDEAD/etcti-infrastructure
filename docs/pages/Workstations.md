@@ -1,0 +1,10 @@
+- Requirements
+	- TODO Preinstalled Netbird
+	- TODO Fedora Kionite/CoreOS
+	- TODO LDAP server
+	- TODO Distrobox preinstalled
+	- TODO WAKE ON LAN
+	- TODO WAKE on Netbird
+	- TODO SSH access
+	- TODO Service User (ssm)
+	-
