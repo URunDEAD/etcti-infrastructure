@@ -1,0 +1,6 @@
+polkit.addRule(function(action, subject) {
+    if (subject.user == "student" &&
+        action.id.startsWith("org.freedesktop.Flatpak")) {
+        return polkit.Result.NO;
+    }
+});

@@ -1,0 +1,12 @@
+---
+all:
+  children:
+    students:
+      hosts:
+        192.168.68.112:
+          ansible_user: ssm
+          ansible_password: data#2020
+      vars:
+        ansible_become: true
+        ansible_become_method: sudo
+        ansible_become_password: data#2020

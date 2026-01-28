@@ -1,0 +1,11 @@
+[Unit]
+Description=Join Netbird Network
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/netbird up --management-url https://netbird.urundead.win --setup-key CA1DDE73-85D5-45D3-98ED-966C4598EF01
+ExecStartPost=/usr/bin/systemctl disable netbird-join-at-first-boot.service
+
+[Install]
+WantedBy=multi-user.target

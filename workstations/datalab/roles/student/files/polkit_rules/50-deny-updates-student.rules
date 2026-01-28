@@ -1,0 +1,10 @@
+polkit.addRule(function(action, subject) {
+    if (subject.user == "student") {
+        if (
+            action.id.startsWith("org.projectatomic.rpmostree") ||
+            action.id.startsWith("org.freedesktop.packagekit")
+        ) {
+            return polkit.Result.NO;
+        }
+    }
+});
