@@ -1,0 +1,9 @@
+---
+- name: Configure Workstations
+  hosts: students
+  become: true
+
+  roles:
+    - netbird
+    - ssm
+    - student

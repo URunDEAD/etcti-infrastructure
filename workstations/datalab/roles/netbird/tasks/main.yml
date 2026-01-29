@@ -1,0 +1,15 @@
+---
+- name: Copy netbird join service
+  ansible.builtin.copy:
+    src: netbird-join-at-first-boot.service
+    dest: /etc/systemd/system/netbird-join-at-first-boot.service
+    mode: '0644'
+    owner: root
+    group: root
+  notify: Enable netbird service
+
+- name: Enable netbird service
+  ansible.builtin.systemd:
+    name: netbird-join-at-first-boot.service
+    enabled: true
+    daemon_reload: true

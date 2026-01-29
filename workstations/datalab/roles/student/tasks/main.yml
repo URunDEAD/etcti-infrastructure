@@ -1,0 +1,74 @@
+---
+- name: Add Flathub repository
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatpak applications
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+    remote: flathub
+  loop: 
+    - org.eclipse.Java
+    - com.visualstudio.code
+    - com.jetbrains.PyCharm-Professional
+  retries: 3
+  delay: 5
+
+# Create student user if not exists (minimal configuration to match previous partial implementation)
+# The previous file had this commented out, but we need a user for the rest to work.
+- name: Create user student
+  ansible.builtin.user:
+    name: student
+    shell: /bin/bash
+    create_home: true
+    state: present
+    password_lock: true
+
+- name: Copy Polkit rules
+  ansible.builtin.copy:
+    src: "polkit_rules/{{ item }}"
+    dest: "/etc/polkit-1/rules.d/{{ item }}"
+    mode: '0644'
+    owner: root
+    group: root
+  loop:
+    - 50-deny-updates-student.rules
+    - 51-deny-flatpak-student.rules
+    - 52-deny-network-student.rules
+
+- name: Copy restore-student-home.sh
+  ansible.builtin.copy:
+    src: student_home_emphereal/restore-student-home.sh
+    dest: /usr/local/sbin/restore-student-home.sh
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Copy student-home-reset.service
+  ansible.builtin.copy:
+    src: student_home_emphereal/student-home-reset.service
+    dest: /etc/systemd/system/student-home-reset.service
+    mode: '0644'
+    owner: root
+    group: root
+  notify: Enable student reset service
+
+- name: Copy student-restrict-ostree RPM
+  ansible.builtin.copy:
+    src: ostree_changes/student-restrict-ostree-1.0-1.fc43.noarch.rpm
+    dest: /tmp/student-restrict-ostree-1.0-1.fc43.noarch.rpm
+
+- name: Install student-restrict-ostree RPM
+  ansible.builtin.dnf:
+    name: /tmp/student-restrict-ostree-1.0-1.fc43.noarch.rpm
+    state: present
+    disable_gpg_check: true
+
+- name: Enable student reset service
+  ansible.builtin.systemd:
+    name: student-home-reset.service
+    enabled: true
+    daemon_reload: true

@@ -1,0 +1,9 @@
+---
+- name: Create ssm user
+  ansible.builtin.user:
+    name: ssm
+    uid: 992
+    groups: wheel
+    append: true
+    state: present
+    create_home: true
